@@ -106,32 +106,30 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen text-slate-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex justify-between">
-          <div className="flex items-center gap-3">
+      <header className="mx-auto flex flex-nowrap justify-between sticky top-0 z-50 w-full backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b p-4">
+          <div className="ml-28 flex items-center gap-3">
             <div className="size-8 rounded-xl bg-accent text-white grid place-items-center font-bold">T</div>
             <span className="font-medium font-mono text-accent text-shadow-lg">{PROFILE.name}</span>
           </div>
-          <nav className="hidden md:flex items-center gap-4 text-sm text-accent font-mono text-shadow-lg">
+          <nav className="hidden md:flex items-center self-end gap-4 text-sm text-accent font-mono text-shadow-lg mr-28">
             <a href="#experience" className="hover:underline">Experience</a>
             <a href="#projects" className="hover:underline">Projects</a>
             <a href="#skills" className="hover:underline">Skills</a>
             <a href="#contact" className="hover:underline">Contact</a>
-            <Button variant="secondary" className="gap-2">
-              <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer">
-                <Download className="size-4" /> CV
+            <Button variant="outline" className="gap-2 h-auto w-20">
+              <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className="text-black h-full w-full">
+                <Download className="size-4 w-full" /> CV
               </a>
             </Button>
           </nav>
-        </div>
       </header>
 
       {/* Hero */}
       
       <main className="">
-        <section className="grid lg:grid-cols-2 gap-8  h-auto bg-[url('../public/assets/burnbeck.jpg')] bg-cover bg-position-[50%_50%]" >
+        <section className="grid lg:grid-cols-2 gap-8 h-auto bg-[url('../public/assets/burnbeck.jpg')] bg-cover bg-position-[50%_50%]" >
           
-            <Card className="h-auto my-10 p-6 mx-6 sm:my-28 md:ml-28 text-shadow-lg">
+            <Card className="col-span-1 h-auto my-10 p-6 mx-6 sm:my-28 md:mx-28 text-shadow-lg ">
               <CardContent>
               <h1 className="text-3xl md:text-4xl font-semibold  tracking-tight text-white">{PROFILE.role}</h1>
               <p className="mt-2 text-white leading-relaxed">{PROFILE.blurb}</p>
@@ -142,11 +140,11 @@ export default function Portfolio() {
                 <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.linkedin} target="_blank" rel="noreferrer"><Linkedin className="size-4" /> LinkedIn</a>
               </div>
               <div className="mt-6 flex flex-wrap gap-3 text-accent">
-                <Button className="gap-2 shadow-xl/30">
-                  <a href="#projects"><Code2 className="size-4 text-accent font-semibold" /> View projects</a>
+                <Button className="gap-2 shadow-xl/30 h-auto">
+                  <a href="#projects" className="px-4 py-2"><Code2 className="size-5 text-accent font-semibold w-full" /> View projects</a>
                 </Button>
                 <Button variant="outline" className="flex flex-row gap-2 text-accent shadow-xl/30">
-                  <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className=" font-semibold text-black/80 text-shadow-2xl hover:text-white"><Download className="size-4 text-accent" /> Download CV</a>
+                  <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className=" font-semibold text-black/80 text-shadow-2xl hover:text-white px-4 py-2 h-full w-full"><Download className="size-5 text-accent w-full" /> Download CV</a>
                 </Button>
               </div>
               </CardContent>
@@ -154,7 +152,7 @@ export default function Portfolio() {
            
         </section>
         {/* Meet Tom */}
-        <section className={"grid grid-cols-2 gap-4 h-200 bg-[url('../public/assets/happyTom.jpg')] bg-cover bg-position-[25%_25%] sm:bg-position-[25%_20%] border-y-2 border-accent"}>
+        <section className={"grid grid-cols-2 gap-4 h-auto md:h-175 bg-[url('../public/assets/happyTom.jpg')] bg-cover bg-position-[25%_25%] sm:bg-position-[25%_20%] border-y-2 border-accent"}>
           <div className="col-span-2 lg:col-start-2 content-end lg:content-center justify-self-end mx-6 lg:my-28 md:mr-28">
             <Card className="shadow-sm sm:h-auto mb-6 content-center text-shadow-lg">
               <CardContent className="p-1 md:p-4">
@@ -174,8 +172,13 @@ export default function Portfolio() {
         </section>
 
         {/* Experience */}
-        <section className={"flex h-auto bg-[url('../public/assets/jellyfish.jpg')] bg-cover border-b-2 border-accent "}>
-          <div className="grid md:grid-cols-3 gap-4 my-28 mx-28 text-shadow-lg">
+        <section id="experience" className={"h-auto bg-[url('../public/assets/jellyfish.jpg')] bg-cover border-b-2 border-accent "}>
+          <div>
+            <h2 className="font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg">Experience</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-4 mb-28 mx-28 text-shadow-lg">
+            
             {EXPERIENCE.map((job, idx) => (
               <Card key={idx} className="">
                 <CardContent className="flex flex-col justify-between p-6 h-full">
@@ -205,13 +208,16 @@ export default function Portfolio() {
         </section>
 
         {/* Projects */}
-        <section id="projects" title="Selected Projects" className={"flex h-auto bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
-          <div className="grid md:grid-cols-3 gap-4 my-28 mx-28 text-shadow-lg">
+        <section id="projects" title="Selected Projects" className={"h-auto bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
+          <div>
+            <h2 className="font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg">Projects</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4 mb-28 mx-28 text-shadow-lg">
             {PROJECTS.map((p, i) => (
-              <Card key={i} className="hover:shadow-sm transition-shadow">
+              <Card key={i} className="">
                 <CardContent className="p-6">
                   <h3 className="font-medium">{p.name}</h3>
-                  <p className="mt-2 text-sm text-slate-700">{p.blurb}</p>
+                  <p className="mt-2 text-sm text-white">{p.blurb}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {p.stack.map((t) => (
                       <Tag key={t}>{t}</Tag>
@@ -255,7 +261,7 @@ export default function Portfolio() {
               <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
                 <div className="flex-1">
                   <h3 className="font-medium">Let’s work together</h3>
-                  <p className="mt-1 text-sm text-slate-700">Open to full‑time or contract roles. I enjoy pragmatic problem solving, clear comms, and shipping value quickly.</p>
+                  <p className="mt-1 text-sm text-white">Open to full‑time or contract roles. I enjoy pragmatic problem solving, clear comms, and shipping value quickly.</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <Button className="gap-2">

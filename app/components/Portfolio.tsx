@@ -128,7 +128,7 @@ export default function Portfolio() {
             <a href="#experience" className="hover:underline">Experience</a>
             <a href="#projects" className="hover:underline">Projects</a>
             <a href="#skills" className="hover:underline">Skills</a>
-            <a href="#contact" className="hover:underline">Contact</a>
+            <a className="hover:underline" href={`mailto:${PROFILE.email}`}>Contact</a>
             <Button variant="outline" className="gap-2 h-auto w-20">
               <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className="text-black h-full w-full">
                 <Download className="size-4 w-full" /> CV

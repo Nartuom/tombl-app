@@ -119,8 +119,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen text-slate-900">
       {/* Header */}
-      <header className="mx-auto flex flex-nowrap justify-between sticky top-0 z-50 w-full backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b p-4">
-          <div className="ml-28 flex items-center gap-3">
+      <header className="mx-auto flex flex-nowrap justify-center md:justify-between sticky top-0 z-50 w-full backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b p-4">
+          <div className="flex items-center gap-3 mx-6 md:ml-28">
             <div className="size-8 rounded-xl bg-accent text-white grid place-items-center font-bold">T</div>
             <span className="font-medium font-mono text-accent text-shadow-lg">{PROFILE.name}</span>
           </div>
@@ -139,7 +139,7 @@ export default function Portfolio() {
 
       {/* Hero */}
       
-      <main className="w-screen">
+      <main className="w-full">
         <section className="grid grid-cols-2 row-span-full h-auto bg-[url('../public/assets/burnbeck.jpg')] bg-cover bg-position-[50%_50%]">
             <Card className="mx-6 md:ml-28 col-span-2 md:col-span-1">
               <CardContent>
@@ -192,9 +192,10 @@ export default function Portfolio() {
         </section>
 
         {/* Experience */}
-        <section id="experience" className={"flex flex-col h-auto bg-[url('../public/assets/jellyfish.jpg')] bg-cover border-b-2 border-accent w-screen"}>
-          <div className="flex-row">
-            <h2 className="font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg">Experience</h2>
+        <section id="experience" className={"flex flex-col h-auto bg-[url('../public/assets/jellyfish.jpg')] bg-cover border-b-2 border-accent w-full"}>
+          <div className="flex justify-center md:justify-start">
+            
+            <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><Code2 className="self-center mr-2"></Code2>Experience</h2>
           </div>
           
           <div className="flex-row inline-flex flex-wrap gap-4 mb-10 mx-0 md:mx-22 text-shadow-lg justify-between">
@@ -228,13 +229,13 @@ export default function Portfolio() {
         </section>
 
         {/* Projects & Services */}
-        <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-2 shrink w-screen bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
+        <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-2 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
         
-          <div className="row-start-1 col-span-2 md:col-span-1 max-h-20 md:border-r-2 border-accent text-center">
-            <h2 className="flex inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="mr-2"></FileText>Projects</h2>
+          <div className="row-start-1 col-span-2 md:col-span-1 h-65px md:border-r-2 border-accent text-center">
+            <h2 className="flex inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
           </div>
            
-          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 mx-6 md:ml-28 md:mr-0 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
+          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 md:mr-0 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
             {PROJECTS.map((p, i) => (
               <Card key={i} className="mt-0 mb-0 w-auto md:w-100">
                 <CardContent className="">
@@ -258,10 +259,10 @@ export default function Portfolio() {
           </div>
 
 
-          <div className="row-start-3 md:row-start-1 col-span-2 md:col-span-1 h-20 text-center">
-            <h2 className="flex inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="mr-2"></FileText>Services</h2>
+          <div className="row-start-3 md:row-start-1 col-span-2 md:col-span-1 h-65px text-center border-t-2 border-accent md:border-0">
+            <h2 className="flex inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
           </div>
-          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-span-2 md:col-span-1 gap-4 pb-10 text-shadow-lg justify-center">
+          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-span-2 md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center">
             {SERVICES.map((p, i) => (
               <Card key={i} className="mt-0 mb-0 w-auto md:w-100">
                 <CardContent className="">
@@ -287,11 +288,11 @@ export default function Portfolio() {
         {/* Skills */}
         <section id="skills" title="Skills" className={"h-auto bg-[url('../public/assets/norway.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
 
-            <div>
-              <h2 className="flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><Database className="mr-2"></Database>Skills</h2>
+            <div className="flex justify-center md:justify-start">
+              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><Database className="self-center mr-2"></Database>Skills</h2>
             </div>
           
-          <div className="flex flex-row flex-wrap gap-4 md:mx-28 mb-6 md:mb-10 md:justify-around">
+          <div className="flex flex-row flex-wrap gap-4 md:mx-28 mb-10 md:justify-around">
             {SKILLS.map((s, i) => (
               <Card key={i} className="flex flex-col w-full md:w-auto mt-0 mb-0">
                 <CardContent className="">

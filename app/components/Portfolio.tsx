@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Github, Linkedin, Download, Code2, Server, Boxes, Database, Hammer, FileText, ExternalLink, CircleCheck } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 

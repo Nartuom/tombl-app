@@ -54,7 +54,7 @@ export const metadata: Metadata = {
       "I build inclusive, dependable web experiences across whatever stack fits.",
     images: [
       {
-        url: "/og/og-card.jpg", // 1200×630
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: "Tom Burton-Lawl — Portfolio",

@@ -296,7 +296,7 @@ export default function Portfolio() {
             {SKILLS.map((s, i) => (
               <Card key={i} className="flex flex-col w-full md:w-auto mt-0 mb-0">
                 <CardContent className="">
-                  <h4 className="font-medium">{s.group}</h4>
+                  <h3 className="font-medium">{s.group}</h3>
                   <div className="flex flex-col flex-wrap mt-2 text-sm space-y-1 text-slate-700 list-disc w-50">
                     {s.items.map((it) => (
                       <Tag key={it}>{it}</Tag>

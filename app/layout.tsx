@@ -84,9 +84,7 @@ export const metadata: Metadata = {
     },
   },
 
-  formatDetection: { telephone: false, address: false, email: false },
-
-  manifest: "/site.webmanifest"
+  formatDetection: { telephone: false, address: false, email: false }
 };
 
 export default function RootLayout({

@@ -164,7 +164,7 @@ export default function Portfolio() {
            
         </section>
         {/* Meet Tom */}
-        <section className={"grid grid-flow-col grid-cols-2 grid-rows-2  md:grid-rows-1 items-center justify-end gap-2 h-175 bg-[url('../public/assets/happyTom.jpg')] bg-[auto_100%] bg-repeat bg-position-[30%_-75px] md:bg-cover md:bg-position-[30%_-65px] overflow-hidden border-y-2 border-accent"}>
+        <section className={"grid grid-flow-col grid-cols-2 grid-rows-2  md:grid-rows-1 items-center justify-end gap-2 h-175 bg-[url('../public/assets/happyTom.jpg')] bg-[auto_100%] bg-no-repeat bg-cover bg-position-[30%_-75px] md:bg-position-[30%_-65px] overflow-hidden border-y-2 border-accent pb-10 md:pb-0"}>
           <div className="col-span-2 md:col-span-1 md:col-start-2 row-span-1 row-start-2 md:row-start-1">
             <Card className="h-auto md:min-w-75 mt-0 mb-0 mx-10 md:mr-28">
               <CardContent className="">

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { Reveal } from "@/app/components/ui/reveal";
 import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
@@ -18,10 +17,9 @@ const PROFILE = {
 };
 
 const SKILLS = [
-  { group: "Core", items: ["JavaScript", "Node.js", "Express", "React/Next.js", "TypeScript", "HTML/CSS","Bootstrap", "Tailwind", "REST APIs", "Wordpress"] },
-  { group: "Data & Infra", items: ["Azure", "AWS", "PostgreSQL", "MongoDB", "SQL", "Redis", "Docker", "CI/CD", "Atlassian Suite"] },
-  { group: "DX & Quality", items: ["Accessibility (WCAG)", "Lighthouse", "Testing mindset", "Problem solving", "Agile/Scrum"] },
-  { group: "Nice to have", items: ["Strapi", "Cloudflare", "Microservices", "Content modelling"] },
+  { group: "Core", items: ["JavaScript", "Node.js", "Express", "React/Next.js", "TypeScript", "HTML/CSS","Bootstrap", "Tailwind", "REST APIs", "Strapi", "Wordpress", "CraftCMS"] },
+  { group: "Data & Infra", items: ["Azure", "AWS", "PostgreSQL", "MongoDB", "SQL", "Redis", "Docker", "Microservices", "CI/CD", "Atlassian Suite"] },
+  { group: "DX & Quality", items: ["Accessibility (WCAG)", "Lighthouse", "Testing mindset", "Problem solving", "Agile/Scrum"] }
 ];
 
 const EXPERIENCE = [
@@ -102,9 +100,6 @@ const HIGHLIGHTS = [
   "Always friendly and approachable"
 ];
 
-// --- UI helpers --------------------------------------------------------------
-const fade = { hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } };
-
 function Tag({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-full border border-accent text-accent font-semibold px-2 py-0.5 text-sm leading-tight bg-gray-900">
@@ -114,7 +109,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 }
 // --- Page --------------------------------------------------------------------
 export default function Portfolio() {
-  const [year] = useState(new Date().getFullYear());
+  const year = new Date().getFullYear();
 
   return (
     <div className="min-h-screen text-slate-900">
@@ -129,10 +124,8 @@ export default function Portfolio() {
             <a href="#projects" className="hover:underline">Projects</a>
             <a href="#skills" className="hover:underline">Skills</a>
             <a className="hover:underline" href={`mailto:${PROFILE.email}`}>Contact</a>
-            <Button variant="outline" className="gap-2 h-auto w-20">
-              <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className="text-black h-full w-full">
-                <Download className="size-4 w-full" /> CV
-              </a>
+            <Button variant="outline" className="flex flex-row gap-2 text-accent shadow-xl/30">
+              <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className=" font-semibold text-black/80 text-shadow-2xl hover:text-white px-4 py-2 h-full w-full"><Download className="size-5 text-accent w-full" /> Download CV</a>
             </Button>
           </nav>
       </header>
@@ -141,34 +134,37 @@ export default function Portfolio() {
       
       <main className="w-full">
         <section className="grid grid-cols-2 row-span-full h-auto bg-[url('../public/assets/burnbeck.jpg')] bg-cover bg-position-[50%_50%]">
-            <Card className="mx-6 md:ml-28 col-span-2 md:col-span-1">
-              <CardContent>
-              <h1 className="text-3xl md:text-4xl font-semibold  tracking-tight text-white">{PROFILE.role}</h1>
-              <p className="mt-2 text-white leading-relaxed">{PROFILE.blurb}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-white">
-                <span className="inline-flex items-center gap-2"><MapPin className="size-4" /> {PROFILE.location}</span>
-                <a className="inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
-                <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.github} target="_blank" rel="noreferrer"><Github className="size-4" /> GitHub</a>
-                <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.linkedin} target="_blank" rel="noreferrer"><Linkedin className="size-4" /> LinkedIn</a>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-3 text-accent">
-                <Button className="gap-2 shadow-xl/30 h-auto">
-                  <a href="#projects" className="px-4 py-2"><Code2 className="size-5 text-accent font-semibold w-full" /> View projects</a>
-                </Button>
-                <Button variant="outline" className="flex flex-row gap-2 text-accent shadow-xl/30">
-                  <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className=" font-semibold text-black/80 text-shadow-2xl hover:text-white px-4 py-2 h-full w-full"><Download className="size-5 text-accent w-full" /> Download CV</a>
-                </Button>
-              </div>
-              </CardContent>
-            </Card> 
+            <Reveal className="md:ml-28 col-span-2 md:col-span-1">
+              <Card className="md:ml-28 my-0">
+                <CardContent>
+                <h1 className="text-3xl md:text-4xl font-semibold  tracking-tight text-white">{PROFILE.role}</h1>
+                <p className="mt-2 text-white leading-relaxed">{PROFILE.blurb}</p>
+                <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-white">
+                  <span className="inline-flex items-center gap-2"><MapPin className="size-4" /> {PROFILE.location}</span>
+                  <a className="inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
+                  <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.github} target="_blank" rel="noreferrer"><Github className="size-4" /> GitHub</a>
+                  <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.linkedin} target="_blank" rel="noreferrer"><Linkedin className="size-4" /> LinkedIn</a>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3 text-accent">
+                  <Button className="gap-2 shadow-xl/30 h-auto">
+                    <a href="#projects" className="px-4 py-2"><Code2 className="size-5 text-accent font-semibold w-full" /> View projects</a>
+                  </Button>
+                  <Button variant="outline" className="flex flex-row gap-2 text-accent shadow-xl/30">
+                    <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className=" font-semibold text-black/80 text-shadow-2xl hover:text-white px-4 py-2 h-full w-full"><Download className="size-5 text-accent w-full" /> Download CV</a>
+                  </Button>
+                </div>
+                </CardContent>
+              </Card>
+            </Reveal>
            
         </section>
         {/* Meet Tom */}
         <section className={"grid grid-flow-col grid-cols-2 grid-rows-2  md:grid-rows-1 items-center justify-end gap-2 h-175 bg-[url('../public/assets/happyTom.jpg')] bg-[auto_100%] bg-no-repeat bg-cover bg-position-[30%_-75px] md:bg-position-[30%_-65px] overflow-hidden border-y-2 border-accent pb-10 md:pb-0"}>
           <div className="col-span-2 md:col-span-1 md:col-start-2 row-span-1 row-start-2 md:row-start-1">
-            <Card className="h-auto md:min-w-75 mt-0 mb-0 mx-10 md:mr-28">
-              <CardContent className="">
-                <div className="">
+            <Reveal>
+            <Card className="h-auto md:min-w-75 my-0 mx-10 md:mr-28">
+              <CardContent>
+                <div>
                   <h2>About me</h2>
                   <p className="text-white md:font-semibold col-11 text-xs md:text-sm">I’m Tom - a dad, curious maker, and space nerd by the sea in Weston-super-Mare. I’m the friendly, conscientious type who takes things apart to understand them and puts them back together tidier. Off-screen you’ll find me fly-fishing at dawn, skating like I’m 15 again, or making chainmaille and useful little wooden things. I love weird, textured music, deep conversations about how minds and systems work, and designing for people who aren’t always listened to.</p>
                   <br/>
@@ -187,6 +183,7 @@ export default function Portfolio() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
           </div>
           
         </section>
@@ -194,18 +191,20 @@ export default function Portfolio() {
         {/* Experience */}
         <section id="experience" className={"flex flex-col h-auto bg-[url('../public/assets/jellyfish.jpg')] bg-cover border-b-2 border-accent w-full"}>
           <div className="flex justify-center md:justify-start">
-            
-            <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><Code2 className="self-center mr-2"></Code2>Experience</h2>
+            <Reveal>
+              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><Code2 className="self-center mr-2"></Code2>Experience</h2>
+            </Reveal>
           </div>
           
           <div className="flex-row inline-flex flex-wrap gap-4 mb-10 mx-0 md:mx-22 text-shadow-lg justify-between">
             
             {EXPERIENCE.map((job, idx) => (
-              <Card key={idx} className="mt-0 mb-0 w-auto md:w-100 mx-0">
+              <Reveal key={idx} delay={idx * 0.05}>
+              <Card className="my-0 w-auto md:w-100 mx-0">
                 <CardContent className="flex flex-col justify-between h-full">
                   <div className="flex flex-col justify-between gap-4">
                     <div>
-                      <h3 className="font-medium font-semibold text-lg text-accent subpixel-antialiased">{job.role}</h3>
+                      <h3 className="font-semibold text-lg text-accent subpixel-antialiased">{job.role}</h3>
                       <p className="text-white">{job.company} · <span className="text-white">{job.period}</span></p>
                     </div>
                     <div>
@@ -224,6 +223,7 @@ export default function Portfolio() {
                   </div>
                 </CardContent>
               </Card>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -232,13 +232,16 @@ export default function Portfolio() {
         <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-2 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
         
           <div className="row-start-1 col-span-2 md:col-span-1 h-65px md:border-r-2 border-accent text-center">
-            <h2 className="flex inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
+            <Reveal>
+              <h2 className="flex inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
+            </Reveal>
           </div>
            
           <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 md:mr-0 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
             {PROJECTS.map((p, i) => (
-              <Card key={i} className="mt-0 mb-0 w-auto md:w-100">
-                <CardContent className="">
+              <Reveal key={i} delay={i * 0.05}>
+              <Card className="my-0 w-auto md:w-100">
+                <CardContent>
                   <h3 className="font-medium">{p.name}</h3>
                   <p className="mt-2 text-sm text-white">{p.blurb}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -255,17 +258,21 @@ export default function Portfolio() {
                   </div>
                 </CardContent>
               </Card>
+              </Reveal>
             ))}
           </div>
 
 
           <div className="row-start-3 md:row-start-1 col-span-2 md:col-span-1 h-65px text-center border-t-2 border-accent md:border-0">
-            <h2 className="flex inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
+            <Reveal>
+              <h2 className="flex inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
+            </Reveal>
           </div>
           <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-span-2 md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center">
             {SERVICES.map((p, i) => (
-              <Card key={i} className="mt-0 mb-0 w-auto md:w-100">
-                <CardContent className="">
+              <Reveal key={i} delay={i * 0.05}>
+              <Card className="my-0 w-auto md:w-100">
+                <CardContent>
                   <h3 className="font-medium">{p.brochureSite.title}</h3>
                   <p className="mt-2 text-sm text-white">{p.brochureSite.description}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -279,6 +286,7 @@ export default function Portfolio() {
                   Enquire: <a className="inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
                 </CardContent>
               </Card>
+              </Reveal>
             ))}
           </div>
           
@@ -289,21 +297,25 @@ export default function Portfolio() {
         <section id="skills" title="Skills" className={"h-auto bg-[url('../public/assets/norway.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
 
             <div className="flex justify-center md:justify-start">
-              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><Database className="self-center mr-2"></Database>Skills</h2>
+              <Reveal>
+                <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><Database className="self-center mr-2"></Database>Skills</h2>
+              </Reveal>
             </div>
           
           <div className="flex flex-row flex-wrap gap-4 md:mx-28 mb-10 md:justify-around">
             {SKILLS.map((s, i) => (
-              <Card key={i} className="flex flex-col w-full md:w-auto mt-0 mb-0">
-                <CardContent className="">
-                  <h3 className="font-medium">{s.group}</h3>
-                  <div className="flex flex-col flex-wrap mt-2 text-sm space-y-1 text-slate-700 list-disc w-50">
-                    {s.items.map((it) => (
-                      <Tag key={it}>{it}</Tag>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <Reveal key={i} delay={i * 0.05} className="w-full md:w-auto justify-center">
+                <Card className="flex flex-col my-0 w-100">
+                  <CardContent className="text-center self-center">
+                    <h3 className="">{s.group}</h3>
+                    <div className="flex flex-col flex-wrap mt-2 text-sm space-y-1 text-slate-700 list-disc w-50 items-center">
+                      {[...s.items].sort((a, b) => a.length - b.length).map((it) => (
+                        <Tag key={it}>{it}</Tag>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Reveal>
             ))}
           </div>
         </section>

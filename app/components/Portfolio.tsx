@@ -13,7 +13,7 @@ const PROFILE = {
   email: "thomas.burton.lawl@gmail.com", 
   github: "https://github.com/Nartuom", 
   linkedin: "https://www.linkedin.com/in/thomas-burton-lawl/", 
-  cvUrl: "/assets/TBL-CV-4.1.pdf",
+  cvUrl: "/assets/TBLCV-4.2.pdf",
 };
 
 const SKILLS = [

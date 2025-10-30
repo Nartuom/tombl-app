@@ -71,6 +71,12 @@ const PROJECTS = [
       "Strapi + Next.js relaunch for a historical‑fiction series. Content modelling, image pipelines, Render deployments.",
     links: [{ label: "View simonphelps.co.uk", href: "https://simonphelps.co.uk/" }],
     stack: ["Strapi", "Next.js", "Render", "Cloudflare"],
+  },
+  {
+    name: "Genomics England - Generation Study Website",
+    blurb: "As part of a 3 dev team, while working at Empyrean Digital ltd, I contributed significantly to building the front-end of this CraftCMS site to pixel-perfect specifications using the designs provided in Figma. This site demonstrates the passion our team had for building modern, accessible, and user friendly sites for large well respected clients in situations where big influxes of traffic would be expected.",
+    links: [{label: "View generationstudy.co.uk", href: "https://www.generationstudy.co.uk"}],
+    stack: ["Docker", "CraftCMS", "Azure", "Tailwind"]
   }
 ];
 const SERVICES = [

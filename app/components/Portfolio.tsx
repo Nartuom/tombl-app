@@ -1,5 +1,7 @@
+import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import Image from "next/image";
 import { Reveal } from "@/app/components/ui/reveal";
-import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck} from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 
@@ -71,12 +73,14 @@ const PROJECTS = [
       "Strapi + Next.js relaunch for a historical‑fiction series. Content modelling, image pipelines, Render deployments.",
     links: [{ label: "View simonphelps.co.uk", href: "https://simonphelps.co.uk/" }],
     stack: ["Strapi", "Next.js", "Render", "Cloudflare"],
+    imageSrc: "/assets/nms.png"
   },
   {
     name: "Genomics England - Generation Study Website",
     blurb: "As part of a 3 dev team, while working at Empyrean Digital ltd, I contributed significantly to building the front-end of this CraftCMS site to pixel-perfect specifications using the designs provided in Figma. This site demonstrates the passion our team had for building modern, accessible, and user friendly sites for large well respected clients in situations where big influxes of traffic would be expected.",
     links: [{label: "View generationstudy.co.uk", href: "https://www.generationstudy.co.uk"}],
-    stack: ["Docker", "CraftCMS", "Azure", "Tailwind"]
+    stack: ["Docker", "CraftCMS", "Azure", "Tailwind"],
+    imageSrc: "/assets/generation-study.png"
   }
 ];
 const SERVICES = [
@@ -106,7 +110,7 @@ const HIGHLIGHTS = [
   "Always friendly and approachable"
 ];
 
-function Tag({ children }: { children: React.ReactNode }) {
+function Tag({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-full border border-accent text-accent font-semibold px-2 py-0.5 text-sm leading-tight bg-gray-900">
       {children}
@@ -116,6 +120,66 @@ function Tag({ children }: { children: React.ReactNode }) {
 // --- Page --------------------------------------------------------------------
 export default function Portfolio() {
   const year = new Date().getFullYear();
+  const [formData, setFormData] = useState({ name: "", message: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formFeedback, setFormFeedback] = useState<string>("");
+
+  const updateField = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (formStatus !== "idle") {
+      setFormStatus("idle");
+      if (formFeedback) {
+        setFormFeedback("");
+      }
+    }
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const name = formData.name.trim();
+    const message = formData.message.trim();
+
+    if (!name || !message) {
+      setFormStatus("error");
+      setFormFeedback("Please add your name and a short message before sending.");
+      return;
+    }
+
+    setFormStatus("submitting");
+    setFormFeedback("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, message }),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(typeof payload.error === "string" ? payload.error : "Something went wrong. Please try again.");
+      }
+
+      setFormStatus("success");
+      setFormFeedback("Thanks for reaching out! I'll be in touch soon.");
+      setFormData({ name: "", message: "" });
+    } catch (error) {
+      const messageText = error instanceof Error ? error.message : "Something went wrong. Please try again.";
+      setFormStatus("error");
+      setFormFeedback(messageText);
+    }
+  };
+
+  const feedbackTone =
+    formStatus === "success"
+      ? "text-emerald-300"
+      : formStatus === "error"
+      ? "text-red-400"
+      : "text-white/80";
 
   return (
     <div className="min-h-screen text-slate-900">
@@ -239,7 +303,7 @@ export default function Portfolio() {
         
           <div className="row-start-1 col-span-2 md:col-span-1 h-65px md:border-r-2 border-accent text-center">
             <Reveal>
-              <h2 className="flex inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
+              <h2 className="inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
             </Reveal>
           </div>
            
@@ -255,6 +319,15 @@ export default function Portfolio() {
                       <Tag key={t}>{t}</Tag>
                     ))}
                   </div>
+                    <div className="flex flex-col">
+                        <Image
+                          src={p.imageSrc}
+                          width={320}
+                          height={250}
+                          objectFit="contain"
+                          alt="screenshot of the project homepage"
+                          className="mt-4 mx-auto"
+                        />
                   <div className="mt-4 flex gap-3">
                     {p.links.map((l, j) => (
                       <a key={j} href={l.href} className="text-sm inline-flex items-center gap-1 hover:underline" target="_blank" rel="noreferrer">
@@ -262,6 +335,8 @@ export default function Portfolio() {
                       </a>
                     ))}
                   </div>
+                    </div>
+                    
                 </CardContent>
               </Card>
               </Reveal>
@@ -271,7 +346,7 @@ export default function Portfolio() {
 
           <div className="row-start-3 md:row-start-1 col-span-2 md:col-span-1 h-65px text-center border-t-2 border-accent md:border-0">
             <Reveal>
-              <h2 className="flex inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
+              <h2 className="inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
             </Reveal>
           </div>
           <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-span-2 md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center">
@@ -326,27 +401,74 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Contact 
-        <section id="contact" title="Contact" icon={<Hammer className="size-5" />}>
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-                <div className="flex-1">
-                  <h3 className="font-medium">Let’s work together</h3>
-                  <p className="mt-1 text-sm text-white">Open to full‑time or contract roles. I enjoy pragmatic problem solving, clear comms, and shipping value quickly.</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Button className="gap-2">
-                    <a href={`mailto:${PROFILE.email}`}><Mail className="size-4"/> Email me</a>
-                  </Button>
-                  <Button variant="outline" className="gap-2">
-                    <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer"><FileText className="size-4"/> CV</a>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section> */}
+        {/* Contact */}
+        <section id="contact" title="Contact" className="bg-black/80 border-t-2 border-accent py-12">
+          <div className="flex justify-center md:justify-start">
+            <Reveal>
+              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg">Let&apos;s work together</h2>
+            </Reveal>
+          </div>
+
+          <div className="px-6 md:px-28">
+            <Reveal delay={0.1}>
+              <Card className="my-0 md:max-w-2xl mx-auto">
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="name" className="text-sm font-semibold text-accent">Name</label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={updateField}
+                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        placeholder="How should I address you?"
+                        autoComplete="name"
+                        maxLength={120}
+                        required
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="message" className="text-sm font-semibold text-accent">Message</label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={updateField}
+                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner min-h-[160px] resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        placeholder="Tell me about your project, needs, or goals."
+                        maxLength={3000}
+                        required
+                      />
+                    </div>
+
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <Button
+                        type="submit"
+                        className="gap-2"
+                        disabled={formStatus === "submitting"}
+                        aria-disabled={formStatus === "submitting"}
+                      >
+                        {formStatus === "submitting" ? "Sending..." : "Send message"}
+                      </Button>
+                      {formFeedback && (
+                        <p className={`text-sm ${feedbackTone}`} role="status" aria-live="polite">
+                          {formFeedback}
+                        </p>
+                      )}
+                    </div>
+
+                    {formStatus === "error" && !formFeedback && (
+                      <p className="text-sm text-red-400">Something went wrong. Please try again.</p>
+                    )}
+                  </form>
+                </CardContent>
+              </Card>
+            </Reveal>
+          </div>
+        </section>
 
         {/* Footer */}
         <footer className="py-10 text-sm backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b text-center text-white">
@@ -356,3 +478,5 @@ export default function Portfolio() {
     </div>
   );
 }
+
+

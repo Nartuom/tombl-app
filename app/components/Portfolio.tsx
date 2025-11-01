@@ -205,7 +205,7 @@ export default function Portfolio() {
       <main className="w-full">
         <section className="grid grid-cols-2 row-span-full h-auto bg-[url('../public/assets/burnbeck.jpg')] bg-cover bg-position-[50%_50%]">
             <Reveal className="md:ml-28 col-span-2 md:col-span-1">
-              <Card className="md:ml-28 my-0">
+              <Card className="md:mx-28 my-0">
                 <CardContent>
                 <h1 className="text-3xl md:text-4xl font-semibold  tracking-tight text-white">{PROFILE.role}</h1>
                 <p className="mt-2 text-white leading-relaxed">{PROFILE.blurb}</p>
@@ -232,7 +232,7 @@ export default function Portfolio() {
         <section className={"grid grid-flow-col grid-cols-2 grid-rows-2  md:grid-rows-1 items-center justify-end gap-2 h-175 bg-[url('../public/assets/happyTom.jpg')] bg-[auto_100%] bg-no-repeat bg-cover bg-position-[30%_-75px] md:bg-position-[30%_-65px] overflow-hidden border-y-2 border-accent pb-10 md:pb-0"}>
           <div className="col-span-2 md:col-span-1 md:col-start-2 row-span-1 row-start-2 md:row-start-1">
             <Reveal>
-            <Card className="h-auto md:min-w-75 my-0 mx-10 md:mr-28">
+            <Card className="h-auto md:min-w-75 my-0 mx-10 md:mx-28">
               <CardContent>
                 <div>
                   <h2>About me</h2>
@@ -266,7 +266,7 @@ export default function Portfolio() {
             </Reveal>
           </div>
           
-          <div className="flex-row inline-flex flex-wrap gap-4 mb-10 mx-0 md:mx-22 text-shadow-lg justify-between">
+          <div className="flex-row inline-flex flex-wrap gap-4 mb-10 mx-0 md:mx-28 text-shadow-lg justify-between">
             
             {EXPERIENCE.map((job, idx) => (
               <Reveal key={idx} delay={idx * 0.05}>
@@ -307,7 +307,7 @@ export default function Portfolio() {
             </Reveal>
           </div>
            
-          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 md:mr-0 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
+          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 md:ml-28 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
             {PROJECTS.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
               <Card className="my-0 w-auto md:w-100">

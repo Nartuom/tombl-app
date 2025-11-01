@@ -302,7 +302,7 @@ export default function Portfolio() {
         {/* Projects & Services */}
         <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
         
-          <div className="row-start-1 md:col-span-2 h-65px md:border-r-2 border-b-2 md:border-t-0 border-accent bg-black text-center">
+          <div className="row-start-1 md:col-span-2 h-65px md:border-r-2 border-accent  text-center">
             <Reveal>
               <h2 className="inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
             </Reveal>
@@ -345,7 +345,7 @@ export default function Portfolio() {
           </div>
 
 
-          <div className="row-start-3 md:row-start-1 md:col-start-3 md:col-span-1 bg-black h-65px text-center border-y-2 md:border-t-0 border-accent">
+          <div className="row-start-3 md:row-start-1 md:col-start-3 md:col-span-1 h-65px text-center  md:border-t-0 border-accent">
             <Reveal>
               <h2 className="inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
             </Reveal>

@@ -300,18 +300,18 @@ export default function Portfolio() {
         </section>
 
         {/* Projects & Services */}
-        <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-2 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
+        <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
         
-          <div className="row-start-1 col-span-2 md:col-span-1 h-65px md:border-r-2 border-accent text-center">
+          <div className="row-start-1 md:col-span-2 h-65px md:border-r-2 border-b-2 md:border-t-0 border-accent bg-black text-center">
             <Reveal>
               <h2 className="inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
             </Reveal>
           </div>
            
-          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 md:ml-28 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
+          <div className="flex flex-row flex-wrap row-start-2 col-span-1 md:col-span-2 md:ml-28 text-shadow-lg pb-10  md:border-r-2 border-accent justify-around">
             {PROJECTS.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
-                <Card className="my-0 w-auto md:w-100">
+                <Card className="my-0 w-90 md:w-100">
                   <CardContent>
                     <h3 className="font-medium">{p.name}</h3>
                     <p className="mt-2 text-sm text-white">{p.blurb}</p>
@@ -323,7 +323,7 @@ export default function Portfolio() {
                     <div className="flex flex-col">
                         <Image
                           src={p.imageSrc}
-                          width={320}
+                          width={300}
                           height={250}
                           objectFit="contain"
                           alt="screenshot of the project homepage"
@@ -345,12 +345,12 @@ export default function Portfolio() {
           </div>
 
 
-          <div className="row-start-3 md:row-start-1 col-span-2 md:col-span-1 h-65px text-center border-t-2 border-accent md:border-0">
+          <div className="row-start-3 md:row-start-1 md:col-start-3 md:col-span-1 bg-black h-65px text-center border-y-2 md:border-t-0 border-accent">
             <Reveal>
               <h2 className="inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
             </Reveal>
           </div>
-          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-span-2 md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center">
+          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-start-1 md:col-start-3 md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center">
             {SERVICES.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
               <Card className="my-0 w-auto md:w-100">

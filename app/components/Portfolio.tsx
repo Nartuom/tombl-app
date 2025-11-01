@@ -311,7 +311,7 @@ export default function Portfolio() {
           <div className="flex flex-row flex-wrap row-start-2 col-span-1 md:col-span-2 md:ml-28 text-shadow-lg pb-10  md:border-r-2 border-accent justify-around">
             {PROJECTS.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
-                <Card className="my-0 w-90 md:w-100">
+                <Card className="my-0 w-80 md:w-100">
                   <CardContent>
                     <h3 className="font-medium">{p.name}</h3>
                     <p className="mt-2 text-sm text-white">{p.blurb}</p>

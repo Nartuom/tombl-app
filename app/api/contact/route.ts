@@ -2,9 +2,7 @@ import sgMail from "@sendgrid/mail";
 import { NextResponse } from "next/server";
 
 const SENDGRID_KEY = process.env.SENDGRID_API_KEY;
-const TO_ADDRESS = process.env.CONTACT_TO_EMAIL || process.env.SENDGRID_TO_EMAIL || process.env.SENDGRID_TO;
-const FROM_ADDRESS = process.env.CONTACT_FROM_EMAIL || process.env.SENDGRID_FROM_EMAIL || process.env.SENDGRID_FROM;
-
+const TO_ADDRESS = process.env.CONTACT_TO_EMAIL;
 if (SENDGRID_KEY) {
   sgMail.setApiKey(SENDGRID_KEY);
 }
@@ -23,7 +21,8 @@ export async function POST(request: Request) {
 
     const name = typeof body?.name === "string" ? body.name.trim() : "";
     const message = typeof body?.message === "string" ? body.message.trim() : "";
-
+    const FROM_ADDRESS = typeof body?.clientEmail === "string" ? body.clientEmail.trim() : "";
+    console.log(name, message, FROM_ADDRESS)
     if (!name || !message) {
       return NextResponse.json({ error: "Name and message are required." }, { status: 400 });
     }

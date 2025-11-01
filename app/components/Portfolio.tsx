@@ -120,7 +120,7 @@ function Tag({ children }: { children: ReactNode }) {
 // --- Page --------------------------------------------------------------------
 export default function Portfolio() {
   const year = new Date().getFullYear();
-  const [formData, setFormData] = useState({ name: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", message: "", clientEmail: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formFeedback, setFormFeedback] = useState<string>("");
 
@@ -141,6 +141,7 @@ export default function Portfolio() {
 
     const name = formData.name.trim();
     const message = formData.message.trim();
+    const clientEmail = formData.clientEmail.trim();
 
     if (!name || !message) {
       setFormStatus("error");
@@ -155,7 +156,7 @@ export default function Portfolio() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, message }),
+        body: JSON.stringify({ name, message, clientEmail }),
       });
 
       const payload = await response.json().catch(() => ({}));
@@ -166,7 +167,7 @@ export default function Portfolio() {
 
       setFormStatus("success");
       setFormFeedback("Thanks for reaching out! I'll be in touch soon.");
-      setFormData({ name: "", message: "" });
+      setFormData({ name: "", message: "", clientEmail: "" });
     } catch (error) {
       const messageText = error instanceof Error ? error.message : "Something went wrong. Please try again.";
       setFormStatus("error");
@@ -310,15 +311,15 @@ export default function Portfolio() {
           <div className="flex-row inline-flex flex-wrap row-span-1 row-start-2 col-span-2 md:col-span-1 md:ml-28 gap-4 text-shadow-lg justify-center md:border-r-2 border-accent pb-10">
             {PROJECTS.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
-              <Card className="my-0 w-auto md:w-100">
-                <CardContent>
-                  <h3 className="font-medium">{p.name}</h3>
-                  <p className="mt-2 text-sm text-white">{p.blurb}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {p.stack.map((t) => (
-                      <Tag key={t}>{t}</Tag>
-                    ))}
-                  </div>
+                <Card className="my-0 w-auto md:w-100">
+                  <CardContent>
+                    <h3 className="font-medium">{p.name}</h3>
+                    <p className="mt-2 text-sm text-white">{p.blurb}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {p.stack.map((t) => (
+                        <Tag key={t}>{t}</Tag>
+                      ))}
+                    </div>
                     <div className="flex flex-col">
                         <Image
                           src={p.imageSrc}
@@ -328,17 +329,17 @@ export default function Portfolio() {
                           alt="screenshot of the project homepage"
                           className="mt-4 mx-auto"
                         />
-                  <div className="mt-4 flex gap-3">
-                    {p.links.map((l, j) => (
-                      <a key={j} href={l.href} className="text-sm inline-flex items-center gap-1 hover:underline" target="_blank" rel="noreferrer">
-                        {l.label} <ExternalLink className="size-3" />
-                      </a>
-                    ))}
-                  </div>
+                      <div className="mt-4 flex gap-3">
+                        {p.links.map((l, j) => (
+                          <a key={j} href={l.href} className="text-sm inline-flex items-center gap-1 hover:underline" target="_blank" rel="noreferrer">
+                            {l.label} <ExternalLink className="size-3" />
+                          </a>
+                        ))}
+                      </div>
                     </div>
                     
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
               </Reveal>
             ))}
           </div>
@@ -402,18 +403,18 @@ export default function Portfolio() {
         </section>
 
         {/* Contact */}
-        <section id="contact" title="Contact" className="bg-black/80 border-t-2 border-accent py-12">
+        <section id="contact" title="Contact" className="bg-black/80 border-b-2 border-accent pt-10">
           <div className="flex justify-center md:justify-start">
             <Reveal>
-              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg">Let&apos;s work together</h2>
+              <h2 className="inline-flex content-center font-semibold text-2xl text-accent mx-6 md:mx-28 text-shadow-lg">Let&apos;s work together</h2>
             </Reveal>
           </div>
 
-          <div className="px-6 md:px-28">
+          <div className="flex flex-row flex-wrap content-center justify-center">
             <Reveal delay={0.1}>
-              <Card className="my-0 md:max-w-2xl mx-auto">
+              <Card className="">
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:w-200" noValidate>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="name" className="text-sm font-semibold text-accent">Name</label>
                       <input
@@ -422,8 +423,23 @@ export default function Portfolio() {
                         type="text"
                         value={formData.name}
                         onChange={updateField}
-                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent placeholder-white"
                         placeholder="How should I address you?"
+                        autoComplete="name"
+                        maxLength={120}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="clientEmail" className="text-sm font-semibold text-accent">Your email</label>
+                      <input
+                        id="clientEmail"
+                        name="clientEmail"
+                        type="email"
+                        value={formData.clientEmail}
+                        onChange={updateField}
+                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent placeholder-white"
+                        placeholder="How can I reach you by email?"
                         autoComplete="name"
                         maxLength={120}
                         required
@@ -437,7 +453,7 @@ export default function Portfolio() {
                         name="message"
                         value={formData.message}
                         onChange={updateField}
-                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner min-h-[160px] resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner min-h-[160px] resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent placeholder-white"
                         placeholder="Tell me about your project, needs, or goals."
                         maxLength={3000}
                         required
@@ -447,7 +463,7 @@ export default function Portfolio() {
                     <div className="flex items-center gap-4 flex-wrap">
                       <Button
                         type="submit"
-                        className="gap-2"
+                        className="gap-2 p-2"
                         disabled={formStatus === "submitting"}
                         aria-disabled={formStatus === "submitting"}
                       >

@@ -48,7 +48,7 @@ const EXPERIENCE = [
       "Built accessible, fast front‑ends and integrated custom CMS features.",
       "Collaborated with designers and content teams to ship on time.",
     ],
-    stack: ["React", "Next.js", "Node", "JS", "PHP", "Wordpress", "SQL", "PostgreSQL", "CI/CD", "Agile/Scrum"],
+    stack: ["React", "Next.js", "Node", "JS", "PHP", "Wordpress","CraftCMS", "SQL", "PostgreSQL", "CI/CD", "Agile/Scrum"],
   },
   {
     company: "Freelance",
@@ -61,7 +61,7 @@ const EXPERIENCE = [
       "Collaborated with designers to create modern and accessible products",
       "Using my knowledge and expertise across the web stack to improve businesses and facilitate the smooth operation of live events"
     ],
-    stack: ["Node", "Express","Javascript", "WCAG/Accessibility", "SQL", "MongoDB", "DevOps", "SEO", "CI/CD", "Streaming"],
+    stack: ["Node", "Express","Javascript", "Strapi","GhostCMS", "WCAG/Accessibility", "SQL", "MongoDB", "DevOps", "SEO", "CI/CD", "Streaming"],
 
   }
 ];

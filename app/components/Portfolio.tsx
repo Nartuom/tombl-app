@@ -70,7 +70,7 @@ const PROJECTS = [
   {
     name: "No Man’s Son — Author Site",
     blurb:
-      "Strapi + Next.js relaunch for a historical‑fiction series. Content modelling, image pipelines, Render deployments.",
+      "Strapi + Next.js relaunch for a historical‑fiction series. I designed and build this site myself as a solo project, working with the client and publishing team to create a site that fits the brand in time for the book launch. This site will be further developed in the future according to needs - adding features like a blog, a 'behind the scenes' section for the authors books, a mailing list for fans and more...",
     links: [{ label: "View simonphelps.co.uk", href: "https://simonphelps.co.uk/" }],
     stack: ["Strapi", "Next.js", "Render", "Cloudflare"],
     imageSrc: "/assets/nms.png"

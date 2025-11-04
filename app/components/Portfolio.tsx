@@ -237,9 +237,9 @@ export default function Portfolio() {
               <CardContent>
                 <div>
                   <h2>About me</h2>
-                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm">I'm Tom - a dad, curious maker, and space nerd by the sea in Weston-super-Mare. I'm the friendly, conscientious type who takes things apart to understand them and puts them back together tidier. Off-screen you'll find me fly-fishing at dawn, skating like I'm 15 again, or making chainmaille and useful little wooden things. I love weird, textured music, deep conversations about how minds and systems work, and designing for people who aren't always listened to.</p>
+                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm">I&#39;m Tom - a dad, curious maker, and space nerd by the sea in Weston-super-Mare. I&#39;m the friendly, conscientious type who takes things apart to understand them and puts them back together tidier. Off-screen you&#39;ll find me fly-fishing at dawn, skating like I&#39;m 15 again, or making chainmaille and useful little wooden things. I love weird, textured music, deep conversations about how minds and systems work, and designing for people who aren&#39;t always listened to.</p>
                   <br/>
-                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm"> I'm ADHD-powered in the best ways, endlessly curious, and happiest when I'm learning and building something that makes someone's day easier.</p>
+                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm"> I&#39;m ADHD-powered in the best ways, endlessly curious, and happiest when I&#39;m learning and building something that makes someone&#39;s day easier.</p>
                   <div className="md:flex-row md:inline-flex md:flex-wrap h-auto justify-around hidden">
                     {HIGHLIGHTS.map((h, i) => (
                       <div key={i} className="flex flex-col col-4 my-2">
@@ -308,7 +308,7 @@ export default function Portfolio() {
             </Reveal>
             <div className="h-65px border-accent text-left text-white mt-2 text-sm leading-relaxed">
               <Reveal>
-                <p>I've worked on many projects I can't publicly show (internal apps, member areas, vendor platforms). I'm happy to walk through the problems, constraints, and results if you'd like to chat! You can see my publically available work below</p>
+                <p>I&#39;ve worked on many projects I can&#39;t publicly show (internal apps, member areas, vendor platforms). I&#39;m happy to walk through the problems, constraints, and results if you&#39;d like to chat! You can see my publically available work below</p>
               </Reveal>
             </div>
           </div>
@@ -359,7 +359,7 @@ export default function Portfolio() {
             </Reveal>
             <div className="h-65px text-left text-white mt-2 text-sm leading-relaxed">
               <Reveal>
-                <p>Whether you're building an online presence or upgrading your e-commerce, I offer a friendly, professional, bespoke package to get you live - and keep you running. I can design, build, and maintain your site. Use my contact form to get in touch for a chat and a quote.</p>
+                <p>Whether you&#39;re building an online presence or upgrading your e-commerce, I offer a friendly, professional, bespoke package to get you live - and keep you running. I can design, build, and maintain your site. Use my contact form to get in touch for a chat and a quote.</p>
               </Reveal>
             </div>
           </div>
@@ -423,7 +423,7 @@ export default function Portfolio() {
         <section id="contact" title="Contact" className="bg-black/80 border-b-2 border-accent">
           <div className="flex justify-center md:justify-start">
             <Reveal>
-              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><MessageCircleQuestionMark className="self-center mr-2"></MessageCircleQuestionMark>Let's work together</h2>
+              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><MessageCircleQuestionMark className="self-center mr-2"></MessageCircleQuestionMark>Let&#39;s work together</h2>
             </Reveal>
           </div>
 

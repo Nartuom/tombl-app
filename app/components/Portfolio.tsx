@@ -308,7 +308,7 @@ export default function Portfolio() {
             </Reveal>
             <div className="h-65px border-accent text-left text-white mt-2 text-sm leading-relaxed">
               <Reveal>
-                <p>I’ve worked on many projects I can’t publicly show (internal apps, member areas, vendor platforms). I’m happy to walk through the problems, constraints, and results if you'd like to chat!</p>
+                <p>I’ve worked on many projects I can’t publicly show (internal apps, member areas, vendor platforms). I’m happy to walk through the problems, constraints, and results if you'd like to chat! You can see my publically available work below :)</p>
               </Reveal>
             </div>
           </div>

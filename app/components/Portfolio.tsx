@@ -237,9 +237,9 @@ export default function Portfolio() {
               <CardContent>
                 <div>
                   <h2>About me</h2>
-                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm">I’m Tom - a dad, curious maker, and space nerd by the sea in Weston-super-Mare. I’m the friendly, conscientious type who takes things apart to understand them and puts them back together tidier. Off-screen you’ll find me fly-fishing at dawn, skating like I’m 15 again, or making chainmaille and useful little wooden things. I love weird, textured music, deep conversations about how minds and systems work, and designing for people who aren’t always listened to.</p>
+                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm">I&apos;m Tom - a dad, curious maker, and space nerd by the sea in Weston-super-Mare. I&apos;m the friendly, conscientious type who takes things apart to understand them and puts them back together tidier. Off-screen you&apos;ll find me fly-fishing at dawn, skating like I&apos;m 15 again, or making chainmaille and useful little wooden things. I love weird, textured music, deep conversations about how minds and systems work, and designing for people who aren&apos;t always listened to.</p>
                   <br/>
-                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm"> I’m ADHD-powered in the best ways, endlessly curious, and happiest when I’m learning and building something that makes someone’s day easier.</p>
+                  <p className="text-white md:font-semibold col-11 text-xs md:text-sm"> I&apos;m ADHD-powered in the best ways, endlessly curious, and happiest when I&apos;m learning and building something that makes someone&apos;s day easier.</p>
                   <div className="md:flex-row md:inline-flex md:flex-wrap h-auto justify-around hidden">
                     {HIGHLIGHTS.map((h, i) => (
                       <div key={i} className="flex flex-col col-4 my-2">

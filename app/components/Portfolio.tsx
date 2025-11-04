@@ -308,7 +308,7 @@ export default function Portfolio() {
             </Reveal>
             <div className="h-65px border-accent text-left text-white mt-2 text-sm leading-relaxed">
               <Reveal>
-                <p>I’ve worked on many projects I can’t publicly show (internal apps, member areas, vendor platforms). I’m happy to walk through the problems, constraints, and results if you'd like to chat! You can see my publically available work below :)</p>
+                <p>I&apos;ve worked on many projects I can&apos;t publicly show (internal apps, member areas, vendor platforms). I&apos;m happy to walk through the problems, constraints, and results if you'd like to chat! You can see my publically available work below</p>
               </Reveal>
             </div>
           </div>
@@ -359,7 +359,7 @@ export default function Portfolio() {
             </Reveal>
             <div className="h-65px text-left text-white mt-2 text-sm leading-relaxed">
               <Reveal>
-                <p>Whether you’re building an online presence or upgrading your e-commerce, I offer a friendly, professional, bespoke package to get you live - and keep you running. I can design, build, and maintain your site. Use my contact form to get in touch for a chat and a quote.</p>
+                <p>Whether you&apos;re building an online presence or upgrading your e-commerce, I offer a friendly, professional, bespoke package to get you live - and keep you running. I can design, build, and maintain your site. Use my contact form to get in touch for a chat and a quote.</p>
               </Reveal>
             </div>
           </div>

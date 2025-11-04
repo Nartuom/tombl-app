@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { Reveal } from "@/app/components/ui/reveal";
-import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck} from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck, MessageCircleQuestionMark} from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 
@@ -300,15 +300,21 @@ export default function Portfolio() {
         </section>
 
         {/* Projects & Services */}
-        <section id="projects" title="Selected Projects" className={"grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
-        
-          <div className="row-start-1 md:col-span-2 h-65px md:border-r-2 border-accent  text-center">
+        <section id="projects" title="Selected Projects" className={"grid grid-cols-12 shrink w-full bg-[url('../public/assets/westonPier.jpg')] bg-cover bg-position-[50%_50%]  border-b-2 border-accent"}>
+        <div className="col-span-12 md:col-span-7 md:border-r-2 border-accent ">
+          <div className="h-65px  text-center mx-6 md:mx-28 p-4">
             <Reveal>
-              <h2 className="inline-flex font-semibold text-2xl text-accent p-6 mx-6 md:mx-28 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
+              <h2 className="inline-flex font-semibold text-2xl text-accent text-shadow-lg"><FileText className="self-center mr-2"></FileText>Projects</h2>
             </Reveal>
+            <div className="h-65px border-accent text-left text-white mt-2 text-sm leading-relaxed">
+              <Reveal>
+                <p>I’ve worked on many projects I can’t publicly show (internal apps, member areas, vendor platforms). I’m happy to walk through the problems, constraints, and results if you'd like to chat!</p>
+              </Reveal>
+            </div>
           </div>
+          
            
-          <div className="flex flex-row flex-wrap row-start-2 col-span-1 md:col-span-2 md:ml-28 text-shadow-lg pb-10  md:border-r-2 border-accent justify-around">
+          <div className="flex flex-row flex-wrap  md:ml-28 text-shadow-lg pb-10 gap-2 justify-around">
             {PROJECTS.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <Card className="my-0 w-80 md:w-100">
@@ -343,14 +349,21 @@ export default function Portfolio() {
               </Reveal>
             ))}
           </div>
+        </div>
+          
 
-
-          <div className="row-start-3 md:row-start-1 md:col-start-3 md:col-span-1 h-65px text-center  md:border-t-0 border-accent">
+        <div className="col-span-12 md:col-span-5 border-t-2 md:border-t-0 border-accent bg-black/50 backdrop-blur-sm bg-gradient-to-b from-black/30 via-black/50 to-black/30 md:backdrop-blur-none md:backdrop-filter-none md:bg-none md:bg-black/0">
+            <div className=" h-65px text-center p-4 mx-6">
             <Reveal>
-              <h2 className="inline-flex row-span-1 col-span-1 h-20 font-semibold text-2xl text-accent p-6 mx-6 text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
+              <h2 className="inline-flex font-semibold text-2xl text-accent text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
             </Reveal>
+            <div className="h-65px text-left text-white mt-2 text-sm leading-relaxed">
+              <Reveal>
+                <p>Whether you’re building an online presence or upgrading your e-commerce, I offer a friendly, professional, bespoke package to get you live - and keep you running. I can design, build, and maintain your site. Use my contact form to get in touch for a chat and a quote.</p>
+              </Reveal>
+            </div>
           </div>
-          <div className="flex-row inline-flex flex-wrap row-span-1 row-start-4 md:row-start-2 col-start-1 md:col-start-3 md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center">
+          <div className="flex-row inline-flex flex-wrap md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center w-full">
             {SERVICES.map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
               <Card className="my-0 w-auto md:w-100">
@@ -366,11 +379,15 @@ export default function Portfolio() {
                     <h4>{p.brochureSite.price}</h4>
                   </div>
                   Enquire: <a className="inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
+                  or
+                  <a className="hover:underline" href="#contact">Contact</a>
                 </CardContent>
               </Card>
               </Reveal>
             ))}
           </div>
+        </div>
+          
           
 
         </section>
@@ -403,10 +420,10 @@ export default function Portfolio() {
         </section>
 
         {/* Contact */}
-        <section id="contact" title="Contact" className="bg-black/80 border-b-2 border-accent pt-10">
+        <section id="contact" title="Contact" className="bg-black/80 border-b-2 border-accent">
           <div className="flex justify-center md:justify-start">
             <Reveal>
-              <h2 className="inline-flex content-center font-semibold text-2xl text-accent mx-6 md:mx-28 text-shadow-lg">Let&apos;s work together</h2>
+              <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><MessageCircleQuestionMark className="self-center mr-2"></MessageCircleQuestionMark>Let&apos;s work together</h2>
             </Reveal>
           </div>
 

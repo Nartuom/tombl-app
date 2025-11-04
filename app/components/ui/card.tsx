@@ -8,7 +8,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex bg-black/50 backdrop-blur-sm bg-gradient-to-b from-black/30 via-black/50 to-black/30 text-white border border-accent rounded-2xl shadow-lg p-5 ml-6 mr-6 my-3",
+      "flex shrink bg-black/50 backdrop-blur-sm bg-gradient-to-b from-black/30 via-black/50 to-black/30 text-white border border-accent rounded-2xl shadow-lg p-5 ml-6 mr-6 my-3",
       // subtle motion-safe hover + accessible focus styles
       "transition-shadow motion-safe:transition-transform motion-safe:hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
       className

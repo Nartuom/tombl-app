@@ -39,7 +39,7 @@ const EXPERIENCE = [
     stack: ["Node", "Express", "MongoDB", "REST", "Docker", "CI/CD", "BootStrap5", "Agile/Scrum"],
   },
   {
-    company: "Software Engineer (Full‑stack)",
+    company: "Empyrean Digital ltd",
     role: "Software Engineer (Full‑stack)",
     period: "2022 — 2024",
     summary:

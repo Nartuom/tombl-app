@@ -4,7 +4,6 @@ import { Reveal } from "@/app/components/ui/reveal";
 import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck, MessageCircleQuestionMark} from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
-import { ThoughtBubbleTags } from "@/app/components/ui/ThoughtBubbleTags";
 
 // --- Editable content 
 const PROFILE = {

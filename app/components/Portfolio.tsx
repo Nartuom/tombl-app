@@ -478,7 +478,7 @@ export default function Portfolio() {
 
         {/* Contact */}
         <section id="contact" title="Contact" className="bg-black/80 border-b-2 border-accent">
-          <div className="flex justify-center md:justify-start">
+          <div className="flex justify-center">
             <Reveal>
               <h2 className="inline-flex content-center font-semibold text-2xl text-accent p-6 mx-10 md:mx-28 text-shadow-lg"><MessageCircleQuestionMark className="self-center mr-2"></MessageCircleQuestionMark>Let&#39;s work together</h2>
             </Reveal>

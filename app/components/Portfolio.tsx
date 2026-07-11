@@ -1,9 +1,11 @@
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
+import { useReCaptcha } from "next-recaptcha-v3";
 import { Reveal } from "@/app/components/ui/reveal";
 import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck, MessageCircleQuestionMark} from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
+
 
 // --- Editable content 
 const PROFILE = {
@@ -133,6 +135,7 @@ export default function Portfolio() {
   const [formData, setFormData] = useState({ name: "", message: "", clientEmail: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formFeedback, setFormFeedback] = useState<string>("");
+  const { executeRecaptcha } = useReCaptcha();
 
   const updateField = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -163,10 +166,12 @@ export default function Portfolio() {
     setFormFeedback("");
 
     try {
+      const token = await executeRecaptcha("contact_form");
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, message, clientEmail }),
+        body: JSON.stringify({ name, message, clientEmail, token }),
       });
 
       const payload = await response.json().catch(() => ({}));
@@ -513,7 +518,7 @@ export default function Portfolio() {
                         onChange={updateField}
                         className="w-full rounded-lg border border-accent bg-black/60 px-3 py-2 text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent placeholder-white"
                         placeholder="How can I reach you by email?"
-                        autoComplete="name"
+                        autoComplete="email"
                         maxLength={120}
                         required
                       />

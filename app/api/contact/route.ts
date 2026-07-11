@@ -1,11 +1,12 @@
-import sgMail from "@sendgrid/mail";
+import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const SENDGRID_KEY = process.env.SENDGRID_API_KEY;
+const RESEND_KEY = process.env.RESEND_API_KEY;
 const TO_ADDRESS = process.env.CONTACT_TO_EMAIL;
-if (SENDGRID_KEY) {
-  sgMail.setApiKey(SENDGRID_KEY);
-}
+const FROM_ADDRESS = process.env.CONTACT_FROM_EMAIL ?? "contact@tombl.co.uk";
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
+
+const resend = RESEND_KEY ? new Resend(RESEND_KEY) : null;
 
 const sanitize = (value: string) =>
   value
@@ -15,14 +16,32 @@ const sanitize = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+async function verifyRecaptcha(token: string) {
+  if (!RECAPTCHA_SECRET) return false;
+
+  const params = new URLSearchParams({ secret: RECAPTCHA_SECRET, response: token });
+  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params,
+  });
+
+  const result = await response.json().catch(() => null);
+
+  return Boolean(
+    result?.success && result.action === "contact_form" && (result.score ?? 0) >= 0.5
+  );
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => null);
 
     const name = typeof body?.name === "string" ? body.name.trim() : "";
     const message = typeof body?.message === "string" ? body.message.trim() : "";
-    const FROM_ADDRESS = typeof body?.clientEmail === "string" ? body.clientEmail.trim() : "";
-    console.log(name, message, FROM_ADDRESS)
+    const clientEmail = typeof body?.clientEmail === "string" ? body.clientEmail.trim() : "";
+    const token = typeof body?.token === "string" ? body.token : "";
+
     if (!name || !message) {
       return NextResponse.json({ error: "Name and message are required." }, { status: 400 });
     }
@@ -31,7 +50,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Message is too long." }, { status: 400 });
     }
 
-    if (!SENDGRID_KEY || !TO_ADDRESS || !FROM_ADDRESS) {
+    if (!token || !(await verifyRecaptcha(token))) {
+      return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
+    }
+
+    if (!resend || !TO_ADDRESS || !clientEmail) {
       return NextResponse.json(
         { error: "Contact service is not configured. Please try a different channel." },
         { status: 503 }
@@ -40,12 +63,13 @@ export async function POST(request: Request) {
 
     const subject = `Portfolio contact from ${name}`;
 
-    await sgMail.send({
+    await resend.emails.send({
       to: TO_ADDRESS,
       from: FROM_ADDRESS,
+      replyTo: clientEmail,
       subject,
       text: `Name: ${name}\nMessage:\n${message}`,
-      html: `<p><strong>Name:</strong> ${sanitize(name)}</p><p>${sanitize(message).replace(/\r?\n/g, "<br />")}</p>`
+      html: `<p><strong>Name:</strong> ${sanitize(name)}</p><p>${sanitize(message).replace(/\r?\n/g, "<br />")}</p>`,
     });
 
     return NextResponse.json({ ok: true });

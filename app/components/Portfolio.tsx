@@ -217,40 +217,6 @@ export default function Portfolio() {
     };
   };
 
-  const tagScatterStyle = (
-    group: string,
-    tag: string,
-    opts?: { compact?: boolean }
-  ) => {
-    const seed = hashString(`${group}::${tag}`);
-    const rand = mulberry32(seed);
-
-    // angle around the bubble
-    const angle = rand() * Math.PI * 2;
-
-    // radius (bigger on desktop / non-compact)
-    const baseR = opts?.compact ? 42 : 70;     // px-ish
-    const jitterR = opts?.compact ? 28 : 55;
-
-    // elliptical feel: wider than tall
-    const r = baseR + rand() * jitterR;
-    const x = Math.cos(angle) * r * (opts?.compact ? 1.1 : 1.35);
-    const y = Math.sin(angle) * r * (opts?.compact ? 0.8 : 1.0);
-
-    // extra jitter so it doesn't look too circular
-    const jx = (rand() - 0.5) * (opts?.compact ? 18 : 28);
-    const jy = (rand() - 0.5) * (opts?.compact ? 14 : 22);
-
-    const rot = (rand() - 0.5) * 14; // degrees
-    const scale = 0.92 + rand() * 0.18;
-
-    return {
-      left: `50%`,
-      top: `50%`,
-      transform: `translate(calc(-50% + ${x + jx}px), calc(-50% + ${y + jy}px)) rotate(${rot}deg) scale(${scale})`,
-    } as const;
-  };
-
 
   return (
     <div className="min-h-screen text-slate-900">
@@ -275,14 +241,15 @@ export default function Portfolio() {
       
       <main className="w-full">
         <section className="grid grid-cols-2 row-span-full h-auto bg-[url('../public/assets/burnbeck.jpg')] bg-cover bg-position-[50%_50%] pt-20 pb-20 ">
-            <Reveal className="md:ml-28 col-span-2 md:col-span-1 mx-6 md:mx-28">
+            <Reveal className="md:ml-28 col-span-2 md:col-span-1 mx-6 md:ms-28">
               <Card className="md:mx-28 my-0">
                 <CardContent>
                 <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">{PROFILE.role}</h1>
                 <p className="mt-2 text-white leading-relaxed">{PROFILE.blurb}</p>
+                <p className="mt-2 inline-flex items-center gap-2"><MapPin className="size-4" /> {PROFILE.location}</p>
+                <a className="mt-2   inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
                 <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-white">
-                  <span className="inline-flex items-center gap-2"><MapPin className="size-4" /> {PROFILE.location}</span>
-                  <a className="inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
+                  
                   <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.github} target="_blank" rel="noreferrer"><Github className="size-4" /> GitHub</a>
                   <a className="inline-flex items-center gap-2 hover:underline" href={PROFILE.linkedin} target="_blank" rel="noreferrer"><Linkedin className="size-4" /> LinkedIn</a>
                 </div>

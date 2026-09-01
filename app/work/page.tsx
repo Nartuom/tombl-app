@@ -47,13 +47,15 @@ export default function WorkPage() {
               <Reveal key={project.slug} delay={i * 0.05} className="h-full">
                 <Card className="flex flex-col h-full text-center">
                   <CardContent className="flex flex-col h-full">
-                    <Image
-                      src={project.imageSrc}
-                      width={300}
-                      height={250}
-                      alt={project.imageAlt}
-                      className="mx-auto border border-accent rounded-lg"
-                    />
+                    {project.imageSrc && project.imageAlt && (
+                      <Image
+                        src={project.imageSrc}
+                        width={300}
+                        height={250}
+                        alt={project.imageAlt}
+                        className="mx-auto border border-accent rounded-lg"
+                      />
+                    )}
                     <h2 className="mt-4 text-lg font-semibold text-accent text-shadow-lg">{project.name}</h2>
                     <p className="mt-2 text-sm text-white/80">{project.client}</p>
                     <Link

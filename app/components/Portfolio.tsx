@@ -298,13 +298,15 @@ export default function Portfolio() {
                           ))}
                         </div>
                         <a href={p.links[0].href} target="_blank" rel="noreferrer" className="text-sm items-center hover:underline">
-                            <Image
-                              src={p.imageSrc}
-                              width={300}
-                              height={250}
-                              alt={p.imageAlt}
-                              className="mt-4 mx-auto border border-accent rounded-lg"
-                            />
+                            {p.imageSrc && p.imageAlt && (
+                              <Image
+                                src={p.imageSrc}
+                                width={300}
+                                height={250}
+                                alt={p.imageAlt}
+                                className="mt-4 mx-auto border border-accent rounded-lg"
+                              />
+                            )}
                             <p className="inline-flex items-center mt-1 justify-center text-accent font-semibold hover:underline">
                               {p.links[0].label}
                               <span className="ml-1"><ExternalLink className="size-3"/></span>

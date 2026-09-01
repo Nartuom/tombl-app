@@ -33,7 +33,7 @@ export async function generateMetadata({
       title: `${project.name} · Tom Burton-Lawl`,
       description: project.challenge,
       url: `https://tombl.co.uk/work/${project.slug}`,
-      images: [{ url: project.imageSrc }],
+      ...(project.imageSrc ? { images: [{ url: project.imageSrc }] } : {}),
     },
   };
 }
@@ -62,13 +62,15 @@ export default async function ProjectDetailPage({
                   {project.name}
                 </h1>
                 <p className="mt-2 text-white/80">{project.client}</p>
-                <Image
-                  src={project.imageSrc}
-                  width={600}
-                  height={500}
-                  alt={project.imageAlt}
-                  className="mt-6 border border-accent rounded-lg"
-                />
+                {project.imageSrc && project.imageAlt && (
+                  <Image
+                    src={project.imageSrc}
+                    width={600}
+                    height={500}
+                    alt={project.imageAlt}
+                    className="mt-6 border border-accent rounded-lg"
+                  />
+                )}
               </div>
             </Reveal>
           </Container>

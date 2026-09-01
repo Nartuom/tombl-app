@@ -7,11 +7,30 @@ export type Project = {
   approach: string[];
   stack: string[];
   links: { label: string; href: string }[];
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
 };
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "coneng",
+    name: "ConEng — Construction Quality Management Platform",
+    client: "Co-founder & Software Director, Construction Engineering Ltd.",
+    blurb:
+      "A quality management platform for construction site teams, co-founded with Sam Phelps (Construction Director). ConEng turns Inspection Test Plans (ITPs) into structured Quality Inspection Records (QIRs) — a guided, mobile-first inspection workflow with audit-ready records, built around how site engineers actually work rather than a generic form builder.",
+    challenge:
+      "Most construction quality-management software is generic and process-heavy, forcing site teams to adapt their workflow to the tool. Sam's experience managing quality compliance on major infrastructure programmes pointed to a gap: something built specifically around the ITP-to-QIR workflow, with UK-hosted, auditable records that are provably unaltered once signed off.",
+    approach: [
+      "Co-founded ConEng with Sam Phelps, pairing his civil engineering and site-delivery experience with software design and engineering",
+      "Built the app on Next.js 15 (App Router), React 19, and TypeScript, with Tailwind CSS v4",
+      "Used Supabase (Postgres, Auth, Storage) hosted in the UK (London, eu-west-2) for data residency, enforcing access control with Row-Level Security in the database itself rather than only in application code",
+      "Modelled the domain around versioned ITP templates and checklist/measurement definitions, with a snapshot rule so signed-off records and their PDFs never change if a template is later revised",
+      "Added a database-level immutability trigger and full audit log so submitted or locked quality records can't be edited after signoff",
+      "Built the 5-stage site engineer inspection wizard (setup, checklist, measurements, files, signoff) alongside a bulk-creation office workflow and weekly programme-progress alignment reporting",
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Zod"],
+    links: [{ label: "View constructioneng.co.uk", href: "https://www.constructioneng.co.uk/" }],
+  },
   {
     slug: "no-mans-son",
     name: "No Man's Son — Author Website",
@@ -55,16 +74,17 @@ export const PROJECTS: Project[] = [
     name: "Twisted Thorn — Editing House Website",
     client: "Twisted Thorn (editorial business)",
     blurb:
-      "I took over an existing Vite + React + Supabase website used by a small editorial business to handle client enquiries and manuscript submissions. My role focused on stabilising and hardening the production system, particularly around authentication, data access, and file storage. I implemented proper staff authentication using Supabase Auth, redesigned database RLS policies to ensure sensitive data is only accessible to authorised users, and secured private file uploads using signed URLs. Alongside the security work, I refactored, restructured, and improved parts of the codebase, front end, and deployment setup to support safe, ongoing operation.",
+      "I've been the sole developer for Twisted Thorn, a small editorial business, since December 2025 — starting with a security-focused takeover of an existing AI-generated site, and continuing since as an ongoing engagement. That's since grown into a services and pricing redesign, an SEO programme built on real Search Console data, a newsletter-backed News page, and performance and analytics work.",
     challenge:
-      "Take over and stabilise an existing production site handling client enquiries and manuscript submissions, where authentication and data-access controls needed urgent hardening.",
+      "The site started as an AI-generated starter build with cosmetic-only authentication and manuscript/enquiry handling that needed real security. Since taking it over, the scope grew from stabilising the platform into an ongoing engagement covering pricing, search visibility, and content.",
     approach: [
-      "Implemented proper staff authentication using Supabase Auth",
-      "Redesigned database Row Level Security (RLS) policies so sensitive data is only accessible to authorised users",
-      "Secured private file uploads using signed URLs",
-      "Refactored the codebase, front end, and deployment setup to support safe, ongoing operation",
+      "Replaced the site's cosmetic-only authentication with real Supabase Auth, and locked down Row-Level Security so CMS writes are admin-only",
+      "Redesigned the services page into CMS-managed Bronze/Silver/Gold pricing tiers the client can edit without a developer",
+      "Ran an SEO programme: FAQ/Person/Review schema markup, and genre-specific editing landing pages targeting queries surfaced from Google Search Console",
+      "Built a News page that reads the client's existing Buttondown newsletter back into the site",
+      "Improved performance with React Query caching/prefetching and eager-loaded navigation to remove loading flashes and layout shift, and wired up PostHog analytics",
     ],
-    stack: ["Vite", "React", "TypeScript", "Node.js", "Supabase"],
+    stack: ["Vite", "React", "TypeScript", "Supabase", "React Query", "PostHog"],
     links: [{ label: "View twisted-thorn.com", href: "https://twisted-thorn.com" }],
     imageSrc: "/assets/TwistedThorn.png",
     imageAlt: "Homepage of the Twisted Thorn editing house website",

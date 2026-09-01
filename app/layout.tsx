@@ -4,6 +4,7 @@ import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { ReCaptchaProvider } from "next-recaptcha-v3"
+import { SERVICES } from "@/lib/services"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,6 +98,22 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false, address: false, email: false }
 };
 
+const serviceOffers = SERVICES.map((service) => ({
+  "@type": "Offer",
+  "@id": `https://tombl.co.uk/#offer-${service.slug}`,
+  url: `https://tombl.co.uk/services/${service.slug}`,
+  name: service.title,
+  description: service.shortDescription,
+  ...(service.slug === "web-development" ? { price: "750", priceCurrency: "GBP" } : {}),
+  seller: { "@id": "https://tombl.co.uk/#business" },
+  itemOffered: {
+    "@type": "Service",
+    name: service.title,
+    description: service.description,
+    areaServed: "GB",
+  },
+}));
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -118,21 +135,42 @@ const structuredData = {
       },
     },
     {
+      "@type": "ProfessionalService",
+      "@id": "https://tombl.co.uk/#business",
+      name: "Tom Burton-Lawl — Web Development, SEO & Consultancy",
+      url: "https://tombl.co.uk",
+      image: "https://tombl.co.uk/og.jpg",
+      founder: { "@id": "https://tombl.co.uk/#person" },
+      email: "mailto:thomas.burton.lawl@gmail.com",
+      priceRange: "££",
+      areaServed: [
+        { "@type": "City", name: "Weston-super-Mare" },
+        { "@type": "AdministrativeArea", name: "Somerset" },
+        { "@type": "City", name: "Bristol" },
+        { "@type": "Country", name: "United Kingdom" },
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Weston-super-Mare",
+        addressCountry: "GB",
+      },
+      sameAs: [
+        "https://github.com/Nartuom",
+        "https://www.linkedin.com/in/thomas-burton-lawl/",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Services",
+        itemListElement: serviceOffers.map((offer) => ({ "@id": offer["@id"] })),
+      },
+    },
+    {
       "@type": "ProfilePage",
       "@id": "https://tombl.co.uk/#profile",
       url: "https://tombl.co.uk",
       mainEntity: { "@id": "https://tombl.co.uk/#person" },
     },
-    {
-      "@type": "Offer",
-      "@id": "https://tombl.co.uk/#brochure-website-package",
-      name: "Brochure Website Package",
-      description:
-        "A clean, professional 5-page brochure site designed to showcase your business and help new customers find you online. Includes a simple contact form, mobile-friendly layout, and essential SEO setup.",
-      price: "750",
-      priceCurrency: "GBP",
-      seller: { "@id": "https://tombl.co.uk/#person" },
-    },
+    ...serviceOffers,
   ],
 };
 

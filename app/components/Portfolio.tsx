@@ -339,11 +339,14 @@ export default function Portfolio() {
                   <CardContent>
                     <h3 className="text-accent text-shadow-lg font-semibold p-4">{service.title}</h3>
                     <p className="mt-2 text-sm text-white self-center">{service.shortDescription}</p>
-                    <div className="mt-3 flex flex-wrap gap-2 justify-center">
-                      {service.features.slice(0, 4).map((t) => (
-                        <Tag key={t}>{t}</Tag>
+                    <ul className="mt-3 space-y-1.5 text-left text-sm text-white">
+                      {service.features.slice(0, 4).map((feature) => (
+                        <li key={feature} className="flex items-start gap-2">
+                          <CircleCheck className="size-4 mt-0.5 shrink-0 text-accent" />
+                          <span>{feature}</span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                     <div>
                       {service.price && (
                         <div className="mt-4">

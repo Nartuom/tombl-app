@@ -1,24 +1,18 @@
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useReCaptcha } from "next-recaptcha-v3";
 import { Reveal } from "@/app/components/ui/reveal";
-import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, ExternalLink, CircleCheck, MessageCircleQuestionMark} from "lucide-react";
+import { SiteHeader } from "@/app/components/SiteHeader";
+import { SiteFooter } from "@/app/components/SiteFooter";
+import { Mail, MapPin, Github, Linkedin, Download, Code2, Database, FileText, Briefcase, ExternalLink, CircleCheck, MessageCircleQuestionMark} from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
+import { PROFILE } from "@/lib/site";
+import { SERVICES } from "@/lib/services";
+import { PROJECTS } from "@/lib/projects";
 
-
-// --- Editable content 
-const PROFILE = {
-  name: "Tom Burton‑Lawl",
-  role: "Full‑Stack Software Engineer",
-  blurb:
-    "Tech-agnostic full-stack engineer with an accessibility-first mindset. Friendly, conscientious, and curious. I learn fast, design inclusively, and ship dependable web apps.",
-  location: "Weston‑super‑Mare, UK",
-  email: "thomas.burton.lawl@gmail.com", 
-  github: "https://github.com/Nartuom", 
-  linkedin: "https://www.linkedin.com/in/thomas-burton-lawl/", 
-  cvUrl: "/assets/TBLCV-4.3.pdf",
-};
+// --- Editable content
 
 const SKILLS = [
   { group: "Core", items: ["JavaScript", "Node.js", "Express", "React/Next.js", "TypeScript", "HTML/CSS","Bootstrap", "Tailwind", "REST APIs", "Strapi", "Wordpress", "CraftCMS"] },
@@ -71,48 +65,6 @@ const EXPERIENCE = [
   }
 ];
 
-const PROJECTS = [
-  {
-    name: "No Man’s Son — Author Site",
-    blurb:
-      "Strapi + Next.js relaunch for a historical‑fiction series. I designed and build this site myself as a solo project, working with the client and publishing team to create a site that fits the brand in time for the book launch. This site will be further developed in the future according to needs - adding features like a blog, a 'behind the scenes' section for the authors books, a mailing list for fans and more...",
-    links: [{ label: "View simonphelps.co.uk", href: "https://simonphelps.co.uk/" }],
-    stack: ["Strapi", "Next.js", "Render", "Cloudflare"],
-    imageSrc: "/assets/nms.png"
-  },
-  {
-    name: "Genomics England - Generation Study Website",
-    blurb: "As part of a 3 dev team, while working at Empyrean Digital ltd, I contributed significantly to building the front-end of this CraftCMS site to pixel-perfect specifications using the designs provided in Figma. This site demonstrates the passion our team had for building modern, accessible, and user friendly sites for large well respected clients in situations where big influxes of traffic would be expected.",
-    links: [{label: "View generationstudy.co.uk", href: "https://www.generationstudy.co.uk"}],
-    stack: ["Docker", "CraftCMS", "Azure", "Tailwind"],
-    imageSrc: "/assets/generation-study.png"
-  },
-  {
-    name: "Twisted Thorn - Editing house website",
-    blurb: "I took over an existing Vite + React + Supabase website used by a small editorial business to handle client enquiries and manuscript submissions. My role focused on stabilising and hardening the production system, particularly around authentication, data access, and file storage. I implemented proper staff authentication using Supabase Auth, redesigned database RLS policies to ensure sensitive data is only accessible to authorised users, and secured private file uploads using signed URLs. Alongside the security work, I refactored, restructured, and improved parts of the codebase, front-end, and deployment setup to support safe, ongoing operation.",
-    links: [{label: "View twistedthorn.co.uk", href: "https://twisted-thorn.com"}],
-    stack: ["Vite", "React", "typescript", "Node.js", "Supabase"],
-    imageSrc: "/assets/TwistedThorn.png" 
-  }
-];
-const SERVICES = [
-  {
-    brochureSite: {
-      title: "Brochure Website Package",
-      description: "A clean, professional 5-page brochure site designed to showcase your business and help new customers find you online. Includes a simple contact form, mobile-friendly layout, and essential SEO setup.",
-      features: [
-        "Up to 5 custom pages",
-        "Mobile-responsive design",
-        "Basic contact form",
-        "Optimised for speed & accessibility",
-        "Setup with your domain & hosting"
-      ],
-      price: "£750",
-      cta: "Perfect for small businesses, freelancers, and local services who need a professional online presence."
-    }
-  },
-]
-
 const HIGHLIGHTS = [
   "Tech agnostic",
   "Accessibility/WCAG‑aware builds",
@@ -131,7 +83,6 @@ function Tag({ children }: { children: ReactNode }) {
 }
 // --- Page --------------------------------------------------------------------
 export default function Portfolio() {
-  const year = new Date().getFullYear();
   const [formData, setFormData] = useState({ name: "", message: "", clientEmail: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formFeedback, setFormFeedback] = useState<string>("");
@@ -220,22 +171,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen text-slate-900">
-      {/* Header */}
-      <header className="mx-auto flex flex-nowrap justify-center md:justify-between sticky top-0 z-50 w-full backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b p-4">
-          <div className="flex items-center gap-3 mx-6 md:ml-28">
-            <div className="size-8 rounded-xl bg-accent text-white grid place-items-center font-bold">T</div>
-            <span className="font-medium font-mono text-accent text-shadow-lg">{PROFILE.name}</span>
-          </div>
-          <nav className="hidden md:flex items-center self-end gap-4 text-sm text-accent font-mono text-shadow-lg mr-28">
-            <a href="#experience" className="hover:underline">Experience</a>
-            <a href="#projects" className="hover:underline">Projects</a>
-            <a href="#skills" className="hover:underline">Skills</a>
-            <a className="hover:underline" href="#contact">Contact</a>
-            <Button variant="outline" className="flex flex-row gap-2 text-accent shadow-xl/30">
-              <a href={PROFILE.cvUrl} target="_blank" rel="noreferrer" className=" font-semibold text-black/80 text-shadow-2xl hover:text-white px-4 py-2 h-full w-full"><Download className="size-5 text-accent w-full" /> Download CV</a>
-            </Button>
-          </nav>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       
@@ -247,6 +183,7 @@ export default function Portfolio() {
                 <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">{PROFILE.role}</h1>
                 <p className="mt-2 text-white leading-relaxed">{PROFILE.blurb}</p>
                 <p className="mt-2 inline-flex items-center gap-2"><MapPin className="size-4" /> {PROFILE.location}</p>
+                <p className="mt-1 text-sm text-white/80">Working with businesses across {PROFILE.areaServed}.</p>
                 <a className="mt-2   inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
                 <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-white">
                   
@@ -360,59 +297,65 @@ export default function Portfolio() {
                             <Tag key={t}>{t}</Tag>
                           ))}
                         </div>
-                        <a href={p.links[0].href} className="text-sm items-center hover:underline">
+                        <a href={p.links[0].href} target="_blank" rel="noreferrer" className="text-sm items-center hover:underline">
                             <Image
                               src={p.imageSrc}
                               width={300}
                               height={250}
-                              objectFit="contain"
-                              alt="screenshot of the project homepage"
+                              alt={p.imageAlt}
                               className="mt-4 mx-auto border border-accent rounded-lg"
                             />
                             <p className="inline-flex items-center mt-1 justify-center text-accent font-semibold hover:underline">
                               {p.links[0].label}
-                              <span className="ml-1"><ExternalLink className="size-3"/></span> 
+                              <span className="ml-1"><ExternalLink className="size-3"/></span>
                             </p>
-                          
+
                         </a>
-                      </div>  
+                        <Link href={`/work/${p.slug}`} className="mt-1 text-sm text-white/80 hover:underline hover:text-accent">
+                          Read case study →
+                        </Link>
+                      </div>
                     </CardContent>
                   </Card>
                 </Reveal>
               ))}
             </div>
           </div>
-          <div className="col-span-12 w-full border-t-2 md:border-t-2 border-accent bg-black/95 backdrop-blur-sm bg-gradient-to-b from-black/30 via-black/50 to-black/30 md:backdrop-blur-none md:backdrop-filter-none md:bg-none md:bg-black/0">
+          <div id="services" className="col-span-12 w-full border-t-2 md:border-t-2 border-accent bg-black/95 backdrop-blur-sm bg-gradient-to-b from-black/30 via-black/50 to-black/30 md:backdrop-blur-none md:backdrop-filter-none md:bg-none md:bg-black/0">
               <div className="bg-black/95 h-65px text-center p-4">
                 <Reveal>
-                  <h2 className="inline-flex mx-6 md:mx-28 font-semibold text-2xl text-accent text-shadow-lg"><FileText className="self-center mr-2"></FileText>Services</h2>
+                  <h2 className="inline-flex mx-6 md:mx-28 font-semibold text-2xl text-accent text-shadow-lg"><Briefcase className="self-center mr-2"></Briefcase>Services</h2>
                 </Reveal>
                 <div className="mx-6 md:mx-28  h-65px text-left text-white mt-2 text-sm leading-relaxed">
                   <Reveal>
-                    <p>Whether you&#39;re building an online presence or upgrading your e-commerce, I offer a friendly, professional, bespoke package to get you live - and keep you running. I can design, build, and maintain your site. Use my contact form to get in touch for a chat and a quote.</p>
+                    <p>Whether you&#39;re building an online presence, need your site to actually get found in search, or want an independent second opinion on a technical decision, I offer friendly, professional, bespoke work to get you live — and keep you running. Use my contact form to get in touch for a chat and a quote.</p>
                   </Reveal>
                 </div>
               </div>
             <div className="flex-row inline-flex flex-wrap md:col-span-1 gap-4 mb-10 text-shadow-lg justify-center py-5 md:py-10 w-full">
-              {SERVICES.map((p, i) => (
-                <Reveal key={i} delay={i * 0.05}>
-                <Card className="my-0 mx-0 text-center w-auto md:w-full justify-center">
+              {SERVICES.map((service, i) => (
+                <Reveal key={service.slug} delay={i * 0.05}>
+                <Card className="my-0 mx-0 text-center w-auto md:w-80 justify-center">
                   <CardContent>
-                    <h3 className="text-accent text-shadow-lg font-semibold p-4">{p.brochureSite.title}</h3>
-                    <p className="mt-2 text-sm text-white w-80 self-center">{p.brochureSite.description}</p>
-                    <div className="mt-3 flex flex-wrap gap-2 justify-center w-80">
-                      {p.brochureSite.features.map((t) => (
+                    <h3 className="text-accent text-shadow-lg font-semibold p-4">{service.title}</h3>
+                    <p className="mt-2 text-sm text-white self-center">{service.shortDescription}</p>
+                    <div className="mt-3 flex flex-wrap gap-2 justify-center">
+                      {service.features.slice(0, 4).map((t) => (
                         <Tag key={t}>{t}</Tag>
                       ))}
                     </div>
                     <div>
-                      <div className="mt-4">
-                        <h4>Price: {p.brochureSite.price}</h4>
-                      </div>
-                      Enquire: <a className="inline-flex items-center gap-2 hover:underline" href={`mailto:${PROFILE.email}`}><Mail className="size-4" /> {PROFILE.email}</a>
-                      <a className="block hover:underline" href="#contact">(or use the contact form below!)</a>
+                      {service.price && (
+                        <div className="mt-4">
+                          <h4>{service.price}</h4>
+                        </div>
+                      )}
+                      <Link href={`/services/${service.slug}`} className="mt-2 inline-block text-accent font-semibold hover:underline">
+                        Learn more →
+                      </Link>
+                      <a className="block hover:underline" href="#contact">or use the contact form below</a>
                     </div>
-                    
+
                   </CardContent>
                 </Card>
                 </Reveal>
@@ -531,11 +474,8 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-5 md:py-10 text-sm backdrop-blur supports-[backdrop-filter]:bg-black/80 border-b text-center text-white">
-          © {year} {PROFILE.name}. Built with React + Tailwind.
-        </footer>
       </main>
+      <SiteFooter />
     </div>
   );
 }

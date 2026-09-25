@@ -17,10 +17,20 @@ import { PROJECTS } from "@/lib/projects";
 const SKILLS = [
   { group: "Core", items: ["JavaScript", "Node.js", "Express", "React/Next.js", "TypeScript", "HTML/CSS","Bootstrap", "Tailwind", "REST APIs", "Strapi", "Wordpress", "CraftCMS"] },
   { group: "Data & Infra", items: ["Azure", "AWS", "PostgreSQL", "MongoDB", "SQL", "Redis", "Docker", "Microservices", "CI/CD", "Atlassian Suite"] },
+  { group: "AI Engineering", items: ["Agentic development workflows", "AI coding agents (Claude Code)", "AI-assisted code review", "AI-assisted refactoring & automation"] },
   { group: "DX & Quality", items: ["Accessibility (WCAG)", "Lighthouse", "Testing mindset", "Problem solving", "Agile/Scrum"] }
 ];
 
 const EXPERIENCE = [
+  {
+    company: "RAC",
+    role: "Frontend Software Engineer",
+    period: "Feb 2026 — Present",
+    summary:
+      "Full-time frontend software engineer at the RAC, building the web experiences behind one of the UK's best-known motoring brands.",
+    bullets: [],
+    stack: ["Frontend"],
+  },
   {
     company: "Source Insurance ltd",
     role: "Software Engineer (Full‑stack)",
@@ -52,7 +62,7 @@ const EXPERIENCE = [
   {
     company: "Freelance",
     role: "Web Developer",
-    period: "2018 — 2025",
+    period: "2018 — Present",
     summary:
       "Working with various clients on projects such as broshure sites for professionals, web analytics and data scraping, and working on production crews to facilitate live streaming of widely recognized events such as Crufts and Henley Royal Regatta",
     bullets: [

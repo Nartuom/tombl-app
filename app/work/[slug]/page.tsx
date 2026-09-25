@@ -24,14 +24,15 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
+  const description = project.metaDescription ?? project.challenge;
 
   return {
     title: project.name,
-    description: project.challenge,
+    description,
     alternates: { canonical: `/work/${project.slug}` },
     openGraph: {
       title: `${project.name} · Tom Burton-Lawl`,
-      description: project.challenge,
+      description,
       url: `https://tombl.co.uk/work/${project.slug}`,
       ...(project.imageSrc ? { images: [{ url: project.imageSrc }] } : {}),
     },

@@ -2,6 +2,7 @@ export type Project = {
   slug: string;
   name: string;
   client: string;
+  metaDescription?: string;
   blurb: string;
   challenge: string;
   approach: string[];
@@ -71,23 +72,30 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "twisted-thorn",
-    name: "Twisted Thorn — Editing House Website",
-    client: "Twisted Thorn (editorial business)",
+    name: "Twisted Thorn Editing House — Website Development & SEO",
+    client: "Twisted Thorn Editing House, UK book editors for fantasy, romance & horror",
+    metaDescription:
+      "Case study: ongoing web development, security and SEO for Twisted Thorn Editing House, a UK book editing service for fantasy, romance and horror authors. React, TypeScript and Supabase.",
     blurb:
-      "I've been the sole developer for Twisted Thorn, a small editorial business, since December 2025 — starting with a security-focused takeover of an existing AI-generated site, and continuing since as an ongoing engagement. That's since grown into a services and pricing redesign, an SEO programme built on real Search Console data, a newsletter-backed News page, and performance and analytics work.",
+      "Since December 2025 I've been the sole developer for Twisted Thorn Editing House, a UK book editing service for fantasy, romance and horror authors. I took over an AI-generated site, secured it, and have since built a CMS for their editing services and pricing, genre-specific landing pages, a newsletter-backed News page, and an SEO programme driven by Google Search Console data.",
     challenge:
-      "The site started as an AI-generated starter build with cosmetic-only authentication and manuscript/enquiry handling that needed real security. Since taking it over, the scope grew from stabilising the platform into an ongoing engagement covering pricing, search visibility, and content.",
+      "Twisted Thorn offers developmental editing, line and copy editing, and proofreading to self-published and indie authors, and needed a site that ranks for searches like \"fantasy book editor UK\" and turns visitors into manuscript enquiries. It had started as an AI-generated build with cosmetic-only authentication and enquiry handling that needed real security. What began as stabilising the platform has grown into an ongoing engagement covering pricing, search visibility and content.",
     approach: [
-      "Replaced the site's cosmetic-only authentication with real Supabase Auth, and locked down Row-Level Security so CMS writes are admin-only",
-      "Redesigned the services page into CMS-managed Bronze/Silver/Gold pricing tiers the client can edit without a developer",
-      "Ran an SEO programme: FAQ/Person/Review schema markup, and genre-specific editing landing pages targeting queries surfaced from Google Search Console",
-      "Built a News page that reads the client's existing Buttondown newsletter back into the site",
-      "Improved performance with React Query caching/prefetching and eager-loaded navigation to remove loading flashes and layout shift, and wired up PostHog analytics",
+      "Replaced the site's cosmetic-only authentication with real Supabase Auth, and locked down Row-Level Security so only admins can write to the CMS and manuscript enquiries stay private",
+      "Redesigned the services page into CMS-managed editing packages (editorial assessment, developmental edit, line and copy edit, proofreading) and Bronze/Silver/Gold tiers the client can update without a developer",
+      "Ran an SEO programme: built fantasy, romance and horror editing landing pages around queries surfaced in Google Search Console, and added FAQ, Person, Review and Breadcrumb schema markup",
+      "Built a News page that pulls the client's existing Buttondown newsletter into the site, so every issue also becomes indexable content",
+      "Improved performance with React Query caching/prefetching and eager-loaded navigation to remove loading flashes and layout shift, and wired up PostHog analytics to track enquiries",
     ],
-    stack: ["Vite", "React", "TypeScript", "Supabase", "React Query", "PostHog"],
-    links: [{ label: "View twisted-thorn.com", href: "https://twisted-thorn.com" }],
+    stack: ["Vite", "React", "TypeScript", "Supabase", "React Query", "PostHog", "SEO"],
+    links: [
+      { label: "Visit Twisted Thorn Editing House", href: "https://www.twisted-thorn.com/" },
+      { label: "Fantasy book editing", href: "https://www.twisted-thorn.com/services/fantasy-book-editing" },
+      { label: "Romance novel editing", href: "https://www.twisted-thorn.com/services/romance-novel-editing" },
+      { label: "Horror book editing", href: "https://www.twisted-thorn.com/services/horror-book-editing" },
+    ],
     imageSrc: "/assets/TwistedThorn.png",
-    imageAlt: "Homepage of the Twisted Thorn editing house website",
+    imageAlt: "Homepage of Twisted Thorn Editing House, UK book editors for fantasy, romance and horror",
   },
 ];
 
